@@ -6,10 +6,9 @@ public class Bill
 {
     [Key]
     public int Id { get; set; }
-
-    [Required]
-    public int ServiceId { get; set; } 
-    public Service Service { get; set; }
+    
+    // A bill can have many services (oneToMany)
+    public ICollection<Service> Services { get; set; }
 
     [Required]
     public decimal TotalAmount { get; set; }
@@ -19,14 +18,17 @@ public class Bill
 
     [Required]
     public bool IsPaid { get; set; }
-        
-    public Bill() { }
 
-    public Bill(int serviceId, decimal totalAmount, DateTime generatedAt, bool isPaid)
+    public Bill()
     {
-        ServiceId = serviceId;
+        Services = new HashSet<Service>();
+    }
+
+    public Bill(decimal totalAmount, DateTime generatedAt, bool isPaid)
+    {
         TotalAmount = totalAmount;
         GeneratedAt = generatedAt;
         IsPaid = isPaid;
+        Services = new HashSet<Service>();
     }
 }

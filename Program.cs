@@ -9,6 +9,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options=>
     options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionPostgres"));
 });
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();

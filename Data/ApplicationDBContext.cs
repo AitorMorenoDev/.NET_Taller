@@ -8,6 +8,6 @@ public class ApplicationDBContext(DbContextOptions<ApplicationDBContext> options
     public DbSet<Client> Clients {get;set;}
     public DbSet<Worker> Workers {get;set;}
     public DbSet<Service> Services {get;set;}
-    public DbSet<Bill> Bills {get;set;}
+    public DbSet<Bill?> Bills {get;set;}
 
 }

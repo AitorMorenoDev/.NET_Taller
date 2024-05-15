@@ -1,0 +1,164 @@
+@Taller_HostAddress = http://localhost:5228
+@idService = 1
+@idBill = 1
+@idClient = 1
+@idWorker = 1
+
+############### CLIENT ENDPOINTS ###############
+// GET ALL CLIENTS
+GET {{Taller_HostAddress}}/api/Client
+Accept: application/json
+
+###
+// ADD A NEW CLIENT
+POST{{Taller_HostAddress}}/api/Client
+Content-Type: application/json
+
+{
+  "Name": "Juan Perez",
+  "Birthdate": "1990-01-01T00:00:00Z",
+  "Gender": "Male",
+  "Address": "123 Street",
+  "Phone": "12345678",
+  "Email": "juan@perez.com",
+  "mobilePhone": "87654321",
+  "Services": []
+}
+
+###
+// GET A CLIENT BY ID
+GET {{Taller_HostAddress}}/api/Client/{{idClient}}
+Accept: application/json
+
+###
+// UPDATE A CLIENT
+PUT {{Taller_HostAddress}}/api/Client/{{idClient}}
+Content-Type: application/json
+
+{
+  "Id": 1,
+  "Services": [],
+  "Name": "Cristina Gomez",
+  "Birthdate": "1990-01-01T00:00:00Z",
+  "Gender": "Female",
+  "Address": "123 Street",
+  "Phone": "12345678",
+  "Email": "cristina@gomez.com",
+  "mobilePhone": "87654321"
+}
+
+###
+// DELETE A CLIENT
+DELETE {{Taller_HostAddress}}/api/Client/{{idClient}}
+Accept: application/json
+
+
+############### WORKER ENDPOINTS ###############
+// GET ALL WORKERS
+GET {{Taller_HostAddress}}/api/Worker
+Accept: application/json
+
+###
+// ADD A NEW WORKER
+POST{{Taller_HostAddress}}/api/Worker
+Content-Type: application/json
+
+{
+  "Name": "Emilio Rodriguez",
+  "Login": "EmilioRod",
+  "Password": "1234",
+  "Role": "Mechanic"
+}
+
+###
+// GET A WORKER BY ID
+GET {{Taller_HostAddress}}/api/Worker/{{idWorker}}
+Accept: application/json
+
+###
+// UPDATE A WORKER
+PUT {{Taller_HostAddress}}/api/Worker/{{idWorker}}
+Content-Type: application/json
+
+{
+  "Id": "1",
+  "Name": "Emilio Rodriguez",
+  "Login": "EmilioRod",
+  "Password": "1234321",
+  "Role": "Mechanic"
+}
+
+###
+// DELETE A WORKER
+DELETE {{Taller_HostAddress}}/api/Worker/{{idWorker}}
+Accept: application/json
+
+
+############### SERVICE ENDPOINTS ###############
+// POST A NEW SERVICE
+POST {{Taller_HostAddress}}/api/Service
+Content-Type: application/json
+
+{
+  "ClientId": {{idClient}},
+  "ServiceType": 2,
+  "LicensePlate": "123-ABC",
+  "Amount": 250,
+  "BillId": {{idBill}}
+}
+
+###
+// ADDS A SERVICE TO A BILL
+POST{{Taller_HostAddress}}/api/Service/Add/{{idBill}}
+Content-Type: application/json
+
+{
+  "ClientId": {{idClient}},
+  "ServiceType": 1,
+  "LicensePlate": "123-ABC",
+  "Amount": 500,
+  "BillId": {{idBill}}
+}
+
+###
+// UPDATE A SERVICE
+PUT {{Taller_HostAddress}}/api/Service/{{idService}}
+Content-Type: application/json
+
+{
+  "ClientId": {{idClient}},
+  "ServiceType": 2,
+  "LicensePlate": "123345-ABC",
+  "Amount": 275
+}
+
+###
+// DELETE A SERVICE
+DELETE {{Taller_HostAddress}}/api/Service/{{idService}}
+Accept: application/json
+
+###
+// FINISH A SERVICE
+PUT {{Taller_HostAddress}}/api/Service/Finish/{{idService}}
+Accept: application/json
+
+
+############### BILL ENDPOINTS ###############
+// GET ALL PENDING BILLS
+GET {{Taller_HostAddress}}/api/Bill/pending
+Accept: application/json
+
+###
+// GET ALL PAID BILLS
+GET {{Taller_HostAddress}}/api/Bill/paid
+Accept: application/json
+
+###
+// CLOSE A BILL
+PUT {{Taller_HostAddress}}/api/Bill/{{idBill}}
+Accept: application/json
+
+###
+// DELETE A BILL
+DELETE {{Taller_HostAddress}}/api/Bill/{{idBill}}
+Accept: application/json

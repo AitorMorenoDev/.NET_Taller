@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace Taller.Models;
 
@@ -21,9 +23,9 @@ public class Service
     [Key]
     public int Id { get; set; }
     
-    [Required]
+    // A service belongs to a client (manyToOne)
     public int ClientId { get; set; }
-    public Client Client { get; set; }
+    public Client? Client { get; set; }
     
     [Required]
     public ServiceType ServiceType { get; set; }
@@ -34,15 +36,22 @@ public class Service
     [Required]
     public DateTime DateCreated { get; set; }
     
-    [Required]
+    [AllowNull]
     public DateTime DateFinished { get; set; }
     
     [Required]
     public Status Status { get; set; }
     
+    [Required]
+    public decimal Amount { get; set; }
+    
+    // A service belongs to a bill (manyToOne)
+    public int BillId { get; set; }
+    public Bill? Bill { get; set; }
+    
     public Service() { }
     
-    public Service(int clientId, ServiceType serviceType, string licensePlate, DateTime dateCreated, DateTime dateFinished, Status status)
+    public Service(int clientId, ServiceType serviceType, string licensePlate, DateTime dateCreated, DateTime dateFinished, Status status, decimal amount, int billId)
     {
         ClientId = clientId;
         ServiceType = serviceType;
@@ -50,6 +59,7 @@ public class Service
         DateCreated = dateCreated;
         DateFinished = dateFinished;
         Status = status;
+        Amount = amount;
+        BillId = billId;
     }
-    
 }

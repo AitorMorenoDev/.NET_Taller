@@ -1,6 +1,0 @@
-@Taller_HostAddress = http://localhost:5228
-
-GET {{Taller_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
